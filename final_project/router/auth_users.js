@@ -5,8 +5,13 @@ const regd_users = express.Router();
 
 let users = [];
 
-const isValid = (username)=>{ //returns boolean
-//write code to check is the username is valid
+const isValid = (username)=>{
+    let usersSameName = users.filter((user) => user.username === username);
+    if (usersSameName.length > 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 const authenticatedUser = (username,password)=>{ //returns boolean
@@ -16,7 +21,7 @@ const authenticatedUser = (username,password)=>{ //returns boolean
 //only registered users can login
 regd_users.post("/login", (req,res) => {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  return res.status(300).json({message: "Yet to be implemented Login"});
 });
 
 // Add a book review
