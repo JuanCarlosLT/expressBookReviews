@@ -32,7 +32,7 @@ public_users.get('/',async function (req, res) {
         const response = await getBooks();
         return res.status(200).send(JSON.stringify(response, null, 4));
     } catch (error) {
-        return res.status(500).json({ message: "Error al obtener los libros" });
+        return res.status(500).json({ message: "Error retrieving the books" });
     }
 });
 
@@ -44,7 +44,7 @@ public_users.get('/isbn/:isbn',function (req, res) {
         if (book) {
             resolve(book);
         } else {
-            reject("Libro no encontrado");
+            reject("Book not found");
         }
     });
     getBook
@@ -67,7 +67,7 @@ public_users.get('/author/:author',function (req, res) {
         if (filteredBooks.length > 0) {
             resolve(filteredBooks);
         } else {
-            reject("No se encontraron libros para el autor indicado");
+            reject("No books were found for the indicated author.");
         }
     });
     getBooksByAuthor
@@ -89,7 +89,7 @@ public_users.get('/title/:title',function (req, res) {
         if (filteredBooks.length > 0) {
             resolve(filteredBooks);
         } else {
-            reject("No se encontraron libros con ese título");
+            reject("No books were found with that title");
         }
     });
 
@@ -105,7 +105,8 @@ public_users.get('/title/:title',function (req, res) {
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
     const isbn = req.params.isbn;
-    return res.send(books[isbn].reviews);
+    // return res.send(books[isbn].reviews);
+    return res.status(200).json(books[isbn]);
 });
 
 module.exports.general = public_users;
